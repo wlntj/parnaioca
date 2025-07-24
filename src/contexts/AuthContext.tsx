@@ -53,6 +53,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     // Don't attempt auth operations if Supabase is not configured
     if (!supabase) {
+      // Set mock user as logged out initially
+      setUser(null)
+      setSession(null)
+      setIsAdmin(false)
       setLoading(false)
       return
     }

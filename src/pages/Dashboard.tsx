@@ -38,6 +38,36 @@ const Dashboard: React.FC = () => {
 
   const loadDashboardData = async () => {
     try {
+      if (!supabase) {
+        // Mock data para demonstração
+        setStats({
+          totalClientes: 25,
+          totalAcomodacoes: 8,
+          ocupacaoAtual: 3,
+          receitaMensal: 15600.00,
+          hospedagensAtivas: [
+            {
+              id: '1',
+              cliente_nome: 'João Silva',
+              acomodacao_nome: 'Suíte Parnaioca',
+              acomodacao_numero: '102',
+              data_checkin: new Date().toISOString(),
+              data_checkout: null
+            },
+            {
+              id: '2',
+              cliente_nome: 'Maria Santos',
+              acomodacao_nome: 'Suíte Lopes Mendes',
+              acomodacao_numero: '101',
+              data_checkin: new Date(Date.now() - 86400000).toISOString(),
+              data_checkout: null
+            }
+          ]
+        })
+        setLoading(false)
+        return
+      }
+
       // Total de clientes ativos
       const { count: totalClientes } = await supabase
         .from('clientes')

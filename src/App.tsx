@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from './contexts/AuthContext'
+import { Toaster } from 'react-hot-toast'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import Clientes from './pages/Clientes'
@@ -39,68 +40,80 @@ const PublicRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/login" element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          } />
-          <Route path="/dashboard" element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          } />
-          <Route path="/clientes" element={
-            <ProtectedRoute>
-              <Clientes />
-            </ProtectedRoute>
-          } />
-          <Route path="/tipos-acomodacao" element={
-            <ProtectedRoute>
-              <TiposAcomodacao />
-            </ProtectedRoute>
-          } />
-          <Route path="/acomodacoes" element={
-            <ProtectedRoute>
-              <Acomodacoes />
-            </ProtectedRoute>
-          } />
-          <Route path="/frigobar" element={
-            <ProtectedRoute>
-              <Frigobar />
-            </ProtectedRoute>
-          } />
-          <Route path="/estacionamento" element={
-            <ProtectedRoute>
-              <Estacionamento />
-            </ProtectedRoute>
-          } />
-          <Route path="/checkin" element={
-            <ProtectedRoute>
-              <CheckIn />
-            </ProtectedRoute>
-          } />
-          <Route path="/relatorios" element={
-            <ProtectedRoute>
-              <Relatorios />
-            </ProtectedRoute>
-          } />
-          <Route path="/analytics" element={
-            <ProtectedRoute>
-              <Analytics />
-            </ProtectedRoute>
-          } />
-          <Route path="/admin" element={
-            <ProtectedRoute>
-              <Admin />
-            </ProtectedRoute>
-          } />
-          <Route path="/" element={<Navigate to="/dashboard" />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
+    <div className="App">
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/login" element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            } />
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/clientes" element={
+              <ProtectedRoute>
+                <Clientes />
+              </ProtectedRoute>
+            } />
+            <Route path="/tipos-acomodacao" element={
+              <ProtectedRoute>
+                <TiposAcomodacao />
+              </ProtectedRoute>
+            } />
+            <Route path="/acomodacoes" element={
+              <ProtectedRoute>
+                <Acomodacoes />
+              </ProtectedRoute>
+            } />
+            <Route path="/frigobar" element={
+              <ProtectedRoute>
+                <Frigobar />
+              </ProtectedRoute>
+            } />
+            <Route path="/estacionamento" element={
+              <ProtectedRoute>
+                <Estacionamento />
+              </ProtectedRoute>
+            } />
+            <Route path="/checkin" element={
+              <ProtectedRoute>
+                <CheckIn />
+              </ProtectedRoute>
+            } />
+            <Route path="/relatorios" element={
+              <ProtectedRoute>
+                <Relatorios />
+              </ProtectedRoute>
+            } />
+            <Route path="/analytics" element={
+              <ProtectedRoute>
+                <Analytics />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin" element={
+              <ProtectedRoute>
+                <Admin />
+              </ProtectedRoute>
+            } />
+            <Route path="/" element={<Navigate to="/login" />} />
+          </Routes>
+        </Router>
+        <Toaster 
+          position="top-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: '#363636',
+              color: '#fff',
+            },
+          }}
+        />
+      </AuthProvider>
+    </div>
   )
 }
 
